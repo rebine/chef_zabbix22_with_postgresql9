@@ -3,14 +3,16 @@ chef_zabbix22_with_postgresql9
 
 Chef solo recipe Zabbix 2.2 and PostgreSQL9.3
 
-*DESCRIPTION
+#DESCRIPTION
+============
 This cookbook contains Zabbix2.2 server and Postgresql9.3.
 And It isnot contains Zabbix Agent.
 
 It tested on Sakura Internet VPS.(CentOS6.5)
 I test with Other Chef cookbooks (httpd..iptables..sshd..and user add).
 
-*RECIPE
+#RECIPE
+=======
 Recipe: postgresql9::default 
   * script[postgresql repo install] action run (skipped due to not_if)
   * package[postgresql93] action install (up to date)

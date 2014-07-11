@@ -1,0 +1,13 @@
+default[:zabbix][:version] = "2.2"
+default[:zabbix][:repourl] = "http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm"
+default[:zabbix][:repo_rpm] = "zabbix-release-2.2-1.el6.noarch"
+default[:zabbix][:package] = [ "zabbix-server-pgsql","zabbix-web-pgsql","zabbix-web-japanese" ]
+default[:zabbix][:sql_dir] = "/usr/share/doc/zabbix-server-pgsql-2.2.4/create"
+default[:zabbix][:pgsql_superuser] = "postgres"
+default[:zabbix][:pgsql_superuser_password] = "postgrespassword"
+default[:zabbix][:database] = "zabbix"
+default[:zabbix][:base_role] = "zabbix"
+default[:zabbix][:dbpassword] = "zabbixpassword"
+default[:zabbix][:server_conf] = "/etc/zabbix/zabbix_server.conf"
+default[:zabbix][:web_conf] = "/etc/zabbix/web/zabbix.conf.php"
+default[:zabbix][:system_name] = "My Zabbix system"
