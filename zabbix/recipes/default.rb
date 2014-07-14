@@ -81,10 +81,13 @@ template "set zabbix server config" do
 end
 
 # zabbix apache config file
-cookbook_file "/etc/httpd/conf.d/zabbix.conf" do
+template "add zabbix to apache config" do
+  path "#{node[:zabbix][:apache_conf]}"
+  source "zabbix.conf.erb"
   owner 'root'
   group 'root'
   mode 0644
+  backup false
 end
 
 # zabbix web config
