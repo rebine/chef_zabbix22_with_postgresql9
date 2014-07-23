@@ -8,7 +8,7 @@
 #
 
 # yum repository rpm install 
-script "postgresql repo install" do
+execute "postgresql repo install" do
   not_if "rpm -qa | grep -i #{node[:postgresql][:repo_rpm]}"
   command "/bin/rpm -ivh #{node[:postgresql][:repourl]}"
 end 
