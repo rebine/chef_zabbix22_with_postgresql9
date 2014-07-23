@@ -6,18 +6,10 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-service "zabbix-server" do
-    service_name "zabbix-server"
-    start_command "/sbin/service zabbix-server start && sleep 1"
-    stop_command "/sbin/service zabbix-server stop && sleep 1"
-    restart_command "/sbin/service zabbix-server restart && sleep 1"
-    reload_command "/sbin/service zabbix-server reload && sleep 1"
-  action :enable
-end
 
 # repository
-script "zabbix repo install" do
-  not_if "rpm -qa | grep #{node[:zabbix][:repo_rpm]}"
+execute "zabbix repo install" do
+  not_if "/bin/rpm -qa | grep #{node[:zabbix][:repo_rpm]}"
   command "/bin/rpm -ivh #{node[:zabbix][:repourl]}"
 end 
 
@@ -67,6 +59,16 @@ end
 execute "insert_data" do
   only_if "psql -U #{node[:zabbix][:pgsql_superuser]} #{node[:zabbix][:database]} -c 'SELECT * FROM hosts' | grep '(0 rows)'"
   command "psql -U #{node[:zabbix][:base_role]} -f #{node[:zabbix][:sql_dir]}/data.sql #{node[:zabbix][:database]}"
+end
+
+# zabbix service
+service "zabbix-server" do
+    service_name "zabbix-server"
+    start_command "/sbin/service zabbix-server start && sleep 1"
+    stop_command "/sbin/service zabbix-server stop && sleep 1"
+    restart_command "/sbin/service zabbix-server restart && sleep 1"
+    reload_command "/sbin/service zabbix-server reload && sleep 1"
+  action :enable
 end
 
 # zabbix server config

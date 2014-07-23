@@ -9,7 +9,7 @@
 
 # yum repository rpm install 
 execute "postgresql repo install" do
-  not_if "rpm -qa | grep -i #{node[:postgresql][:repo_rpm]}"
+  not_if "/bin/rpm -qa | grep -i #{node[:postgresql][:repo_rpm]}"
   command "/bin/rpm -ivh #{node[:postgresql][:repourl]}"
 end 
 
@@ -22,7 +22,7 @@ end
 
 # data dir initialize
 execute "initdb" do
-  not_if "test -d #{node[:postgresql][:dir]}"
+  not_if "test -d #{node[:postgresql][:dir]}/base"
   command "/sbin/service postgresql-#{node[:postgresql][:version]} initdb && sleep 20"
   action :run
 end
