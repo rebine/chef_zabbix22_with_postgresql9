@@ -9,7 +9,7 @@ This cookbook contains Zabbix2.2 server and Postgresql9.3.
 And It isnot contains Zabbix Agent.
 
 It tested on Sakura Internet VPS.(CentOS6.5)
-I test with Other Chef cookbooks (httpd..iptables..sshd..and user add).
+I tested with other chef cookbooks (httpd..iptables..sshd..and user add).
 
 #RECIPE
 =======
@@ -37,5 +37,5 @@ Recipe: zabbix::default
   * execute[insert_image] action run (skipped due to only_if)
   * execute[insert_data] action run (skipped due to only_if)
   * template[set zabbix server config] action create
-  * cookbook_file[/etc/httpd/conf.d/zabbix.conf] action create (up to date)
+  * template[add zabbix to apache config] action create (up to date)
   * template[set zabbix web config] action create (up to date)
