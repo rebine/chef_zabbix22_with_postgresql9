@@ -8,10 +8,13 @@
 #
 
 # repository
-execute "zabbix repo install" do
+e = execute "zabbix repo install" do
   not_if "/bin/rpm -qa | grep #{node[:zabbix][:repo_rpm]}"
   command "/bin/rpm -ivh #{node[:zabbix][:repourl]}"
+  action :nothing
 end 
+
+e.run_action(:run)
 
 # package
 node[:zabbix][:package].each do |package_name|
